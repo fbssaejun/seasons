@@ -1,11 +1,28 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 
+class App extends React.Component {
 
-const App = () => {
-  return <div>Hello World!</div>
-};
+  //React.Component already has a constructor function, but writing another constructor function here overwrites its default constructor
+  constructor(props) {
+    //Super is a reference to parent's constructor function
+    super(props);
+
+    this.state = { lat: null };
+  }
+
+  render () {
+    //Get user's location from geolocation API(built in most of the existing browsers)
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => console.log(position),
+      (err) => console.log(err)
+    )
+    
+    return <div>Latitude: </div>
+  }
+}
 
 ReactDOM.render(
   <App/>,
-  document.querySelector('#app')
+  document.querySelector('#root')
 );
